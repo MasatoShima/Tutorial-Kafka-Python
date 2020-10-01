@@ -42,7 +42,7 @@ logger.addHandler(handler)
 # **************************************************
 # ----- Function main
 # **************************************************
-def main():
+def main() -> None:
 	logger.info("Start process...")
 
 	publish_message()
@@ -55,17 +55,17 @@ def main():
 # **************************************************
 # ----- Function publish_message
 # **************************************************
-def publish_message():
+def publish_message() -> None:
 	logger.info("Start publish messages...")
 
 	producer = KafkaProducer(bootstrap_servers=f"{HOST}:{PORT}")
 
 	for _ in range(0, 10):
-		value = {
-			"time": str(datetime.datetime.now())
-		}
+		value = {"time": str(datetime.datetime.now())}
+		value = json.dumps(value)
+		value = value.encode("utf-8")
 
-		producer.send(topic=TOPIC, value=json.dumps(value))
+		producer.send(topic=TOPIC, value=value)
 
 	logger.info("End publish messages...")
 
