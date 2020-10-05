@@ -1,0 +1,78 @@
+"""
+Name: consumer.py
+Created by: Masato Shima
+Created on: 2020/10/05
+Description:
+	Kafka consumer
+"""
+
+# **************************************************
+# ----- Import Library
+# **************************************************
+import logging
+import os
+
+from kafka import KafkaConsumer
+
+
+# **************************************************
+# ----- Constants & Variables
+# **************************************************
+HOST = "localhost"
+PORT = "9092"
+
+TOPIC = "quickstart-events"
+
+
+# **************************************************
+# ----- Set logger
+# **************************************************
+logger = logging.getLogger(str(os.path.basename(__file__).split(".")[0]))
+logger.setLevel(logging.INFO)
+
+handler = logging.StreamHandler()
+handler.setLevel(logging.INFO)
+handler.setFormatter(logging.Formatter("%(asctime)s %(name)-8s %(levelname)-8s %(message)s"))
+
+logger.addHandler(handler)
+
+
+# **************************************************
+# ----- Function main
+# **************************************************
+def main() -> None:
+	logger.info("Start process...")
+
+	subscribe_message()
+
+	logger.info("End process...")
+
+	return
+
+
+# **************************************************
+# ----- Function subscribe_message
+# **************************************************
+def subscribe_message() -> None:
+	logger.info("Start subscribe messages...")
+
+	consumer = KafkaConsumer(TOPIC)
+
+	for message in consumer:
+		print(message)
+
+	logger.info("End subscribe messages...")
+
+	return
+
+
+# **************************************************
+# ----- Process Main
+# **************************************************
+if __name__ == "__main__":
+	main()
+
+
+# **************************************************
+# ----- End
+# **************************************************
