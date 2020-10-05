@@ -56,10 +56,14 @@ def main() -> None:
 def subscribe_message() -> None:
 	logger.info("Start subscribe messages...")
 
-	consumer = KafkaConsumer(TOPIC)
+	try:
+		consumer = KafkaConsumer(TOPIC)
 
-	for message in consumer:
-		print(message)
+		for message in consumer:
+			print(message)
+
+	except KeyboardInterrupt:
+		logger.info("Received request to end subscribe")
 
 	logger.info("End subscribe messages...")
 
