@@ -1,5 +1,28 @@
 [[package]]
 category = "main"
+description = "Avro is a serialization and RPC framework."
+name = "avro-python3"
+optional = false
+python-versions = "*"
+version = "1.8.2"
+
+[[package]]
+category = "main"
+description = "Fast read/write of AVRO files"
+name = "fastavro"
+optional = false
+python-versions = ">=3.0"
+version = "1.0.0.post1"
+
+[package.extras]
+codecs = ["python-snappy", "zstandard", "lz4", "backports.lzma"]
+lz4 = ["lz4"]
+snappy = ["python-snappy"]
+xz = ["backports.lzma"]
+zstandard = ["zstandard"]
+
+[[package]]
+category = "main"
 description = "Pure Python client for Apache Kafka"
 name = "kafka-python"
 optional = false
@@ -10,10 +33,32 @@ version = "2.0.2"
 crc32c = ["crc32c"]
 
 [metadata]
-content-hash = "036974b0dfd828f90a0b31fae768978689d3c19746471e053b26056c910c22ed"
+content-hash = "9ccf54e912053a7bbc31c1ade4aadbc3ba9f5675786af1a25bb101606237ef2e"
 python-versions = "^3.8.0"
 
 [metadata.files]
+avro-python3 = [
+    {file = "avro-python3-1.8.2.tar.gz", hash = "sha256:f82cf0d66189600b1e6b442f650ad5aca6c189576723dcbf6f9ce096eab81bd6"},
+]
+fastavro = [
+    {file = "fastavro-1.0.0.post1-cp35-cp35m-macosx_10_14_x86_64.whl", hash = "sha256:904c897857550325a9a88802ee3fdeaf77f1dc15ab77072da803f0d69f2667f4"},
+    {file = "fastavro-1.0.0.post1-cp35-cp35m-manylinux2014_x86_64.whl", hash = "sha256:4316fbcab83d745313210e5df3b033392c7ce0f33731a7da3708a135e08065c5"},
+    {file = "fastavro-1.0.0.post1-cp35-cp35m-win32.whl", hash = "sha256:7c9ebc6d030d99ec5213291b4caf94071aa1f47f1ec4356dfec878921333111a"},
+    {file = "fastavro-1.0.0.post1-cp35-cp35m-win_amd64.whl", hash = "sha256:d419396c4fde2696449f333d14381a43efaa98ba6e4a0c2ccafd560e6d8ed26f"},
+    {file = "fastavro-1.0.0.post1-cp36-cp36m-macosx_10_14_x86_64.whl", hash = "sha256:6e2e3688597c8556ca0c60a130c4fabbb4d603806c6b5f95f3744d5dbb9e51b6"},
+    {file = "fastavro-1.0.0.post1-cp36-cp36m-manylinux2014_x86_64.whl", hash = "sha256:34384e2409a44791bab60730378cd82a2e6f2e60fc8373a802fc5004793d6f0a"},
+    {file = "fastavro-1.0.0.post1-cp36-cp36m-win32.whl", hash = "sha256:d389f54f7086c8e8400b9a0a7db1d2f9a94c144f3747e43bc3bf3a8b3eb6603d"},
+    {file = "fastavro-1.0.0.post1-cp36-cp36m-win_amd64.whl", hash = "sha256:7871df79df6349f1c4de55b57dfb1f663f2f9736ce915604a1667d8655fa076c"},
+    {file = "fastavro-1.0.0.post1-cp37-cp37m-macosx_10_14_x86_64.whl", hash = "sha256:22f3501913116e81d6f323dc70ec9ac117728a168d54d7b9efd5256217e49c2a"},
+    {file = "fastavro-1.0.0.post1-cp37-cp37m-manylinux2014_x86_64.whl", hash = "sha256:07a4fa3ea767dbdaeb827b144c8620212cf2e31bd573e31a5508e2a6757a1f17"},
+    {file = "fastavro-1.0.0.post1-cp37-cp37m-win32.whl", hash = "sha256:844985b80e331013ce5d341d41a21fe876ed8aa2badeeac6c1cf0592a5db26c5"},
+    {file = "fastavro-1.0.0.post1-cp37-cp37m-win_amd64.whl", hash = "sha256:b2cfe2ee4c4c9ee4d782ab5b8e3f6c427f7774d9061e31209e29d9d7071127ff"},
+    {file = "fastavro-1.0.0.post1-cp38-cp38-macosx_10_14_x86_64.whl", hash = "sha256:40ea33e099da96abeee3ab0110c5865b220e71b03aa1c1b90135bd40c21e6f23"},
+    {file = "fastavro-1.0.0.post1-cp38-cp38-manylinux2014_x86_64.whl", hash = "sha256:2f4f521e31a4fe1da1807da696181e3dcb984b9ca8a64bad4816724974d11bf8"},
+    {file = "fastavro-1.0.0.post1-cp38-cp38-win32.whl", hash = "sha256:f69ae43180e89ffbf6feb8569fe5573f8f37214a9e4705ef2f00e279d3641971"},
+    {file = "fastavro-1.0.0.post1-cp38-cp38-win_amd64.whl", hash = "sha256:e713127a9faec87767137c93d01e7c60ac000b440a7f331b718f34e32c451797"},
+    {file = "fastavro-1.0.0.post1.tar.gz", hash = "sha256:77e21bdcefc278df1d4c12e7bf787dcf767870478870a6e9e334a2cd486f1820"},
+]
 kafka-python = [
     {file = "kafka-python-2.0.2.tar.gz", hash = "sha256:04dfe7fea2b63726cd6f3e79a2d86e709d608d74406638c5da33a01d45a9d7e3"},
     {file = "kafka_python-2.0.2-py2.py3-none-any.whl", hash = "sha256:2d92418c7cb1c298fa6c7f0fb3519b520d0d7526ac6cb7ae2a4fc65a51a94b6e"},
