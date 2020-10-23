@@ -22,7 +22,7 @@ from kafka import KafkaConsumer
 HOST = "localhost"
 PORT = "9092"
 
-TOPIC = "quickstart-events"
+TOPIC = "SKDB.public.sdmstbas"
 
 
 # **************************************************
