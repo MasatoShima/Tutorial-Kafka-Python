@@ -9,6 +9,7 @@ Description:
 # **************************************************
 # ----- Import Library
 # **************************************************
+import datetime
 import logging
 import os
 
@@ -59,8 +60,20 @@ def subscribe_message() -> None:
 	try:
 		consumer = KafkaConsumer(TOPIC)
 
+		i = 0
+
 		for message in consumer:
 			print(message)
+
+			file_name = f"message_{int(datetime.datetime.today().timestamp())}"
+
+			with open(file_name, "wb") as file:
+				file.write(message)
+
+			if i <= 10:
+				continue
+			else:
+				break
 
 	except KeyboardInterrupt:
 		logger.info("Received request to end subscribe")
