@@ -71,6 +71,7 @@ def subscribe_message() -> None:
 
 		while True:
 			messages = consumer.poll()
+			print(messages)
 
 			for message in messages:
 				logger.info(f"Received message. Key: {message.key}")
