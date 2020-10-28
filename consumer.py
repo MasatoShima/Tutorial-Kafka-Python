@@ -69,13 +69,16 @@ def subscribe_message() -> None:
 			max_poll_records=1
 		)
 
-		for message in consumer:
-			logger.info(f"Received message. Key: {message.key}")
+		while True:
+			messages = consumer.poll()
 
-			file_name = f"message_{int(datetime.datetime.today().timestamp())}"
+			for message in messages:
+				logger.info(f"Received message. Key: {message.key}")
 
-			with open(f"{DIR_OUTPUT}{file_name}", "wb") as file:
-				file.write(message.value)
+				file_name = f"message_{int(datetime.datetime.today().timestamp())}"
+
+				with open(f"{DIR_OUTPUT}{file_name}", "wb") as file:
+					file.write(message.value)
 
 	except KeyboardInterrupt:
 		logger.info("Received request to end subscribe")
