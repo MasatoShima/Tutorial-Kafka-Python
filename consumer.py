@@ -58,7 +58,10 @@ def subscribe_message() -> None:
 	logger.info("Start subscribe messages...")
 
 	try:
-		consumer = KafkaConsumer(TOPIC)
+		consumer = KafkaConsumer(
+			topics=TOPIC,
+			bootstrap_servers=f"{HOST}:{PORT}"
+		)
 
 		i = 0
 
