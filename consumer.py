@@ -65,7 +65,8 @@ def subscribe_message() -> None:
 			TOPIC,
 			bootstrap_servers=f"{HOST}:{PORT}",
 			auto_offset_reset="earliest",
-			enable_auto_commit=False
+			enable_auto_commit=False,
+			max_poll_records=1
 		)
 
 		for message in consumer:
