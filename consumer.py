@@ -67,7 +67,7 @@ def subscribe_message() -> None:
 
 		i = 0
 
-		for message in consumer.poll(max_records=10):
+		for message in consumer:
 			print(message)
 
 			file_name = f"message_{int(datetime.datetime.today().timestamp())}"
