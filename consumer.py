@@ -21,8 +21,9 @@ from kafka import KafkaConsumer
 # **************************************************
 HOST = "10.2.151.196"
 PORT = "9092"
-
 TOPIC = "SKDB.public.sdmstbas"
+
+DIR_OUTPUT = "data/output/"
 
 
 # **************************************************
@@ -58,29 +59,22 @@ def subscribe_message() -> None:
 	logger.info("Start subscribe messages...")
 
 	try:
+		os.makedirs(DIR_OUTPUT, exist_ok=True)
+
 		consumer = KafkaConsumer(
 			TOPIC,
 			bootstrap_servers=f"{HOST}:{PORT}",
-			auto_offset_reset="latest",
+			auto_offset_reset="earliest",
 			enable_auto_commit=False
 		)
 
-		i = 0
-
 		for message in consumer:
-			print(message)
+			logger.info(f"Received message. Key: {message.key}")
 
 			file_name = f"message_{int(datetime.datetime.today().timestamp())}"
 
-			with open(file_name, "wb") as file:
+			with open(f"{DIR_OUTPUT}{file_name}", "wb") as file:
 				file.write(message.value)
-
-			i += 1
-
-			if i <= 10:
-				continue
-			else:
-				break
 
 	except KeyboardInterrupt:
 		logger.info("Received request to end subscribe")
