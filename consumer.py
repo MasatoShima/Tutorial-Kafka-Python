@@ -12,6 +12,7 @@ Description:
 import datetime
 import logging
 import os
+import traceback
 
 from kafka import KafkaConsumer
 
@@ -70,19 +71,33 @@ def subscribe_message() -> None:
 		)
 
 		while True:
-			records = consumer.poll()
+			records = consumer.poll(
+				timeout_ms=5000,
+				max_records=1,
+				update_offsets=False
+			)
 
 			for record in records.values():
 				for r in record:
-					logger.info(f"Received message. Key: {r.key}")
+					if r.value is not None:
+						logger.info(f"Received message. Key: {r.key}")
 
-					file_name = f"message_{int(datetime.datetime.today().timestamp())}"
+						file_name = f"message_{int(datetime.datetime.today().timestamp())}"
 
-					with open(f"{DIR_OUTPUT}{file_name}", "wb") as file:
-						file.write(r.value)
+						with open(f"{DIR_OUTPUT}{file_name}", "wb") as file:
+							file.write(r.value)
+					else:
+						continue
 
 	except KeyboardInterrupt:
 		logger.info("Received request to end subscribe")
+
+	except Exception as error:
+		logger.error(
+			f"Unknown exception..."
+			f"{error}"
+			f"{traceback.format_exc()}"
+		)
 
 	logger.info("End subscribe messages...")
 
