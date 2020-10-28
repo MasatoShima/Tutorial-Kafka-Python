@@ -73,7 +73,7 @@ def subscribe_message() -> None:
 			file_name = f"message_{int(datetime.datetime.today().timestamp())}"
 
 			with open(file_name, "wb") as file:
-				file.write(message)
+				file.write(message.value)
 
 			i += 1
 
