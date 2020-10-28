@@ -19,7 +19,7 @@ from kafka import KafkaConsumer
 # **************************************************
 # ----- Constants & Variables
 # **************************************************
-HOST = "ip-10-2-152-95.ap-northeast-1.compute.internal"
+HOST = "10.2.151.196"
 PORT = "9092"
 
 TOPIC = "SKDB.public.sdmstbas"
