@@ -65,13 +65,15 @@ def subscribe_message() -> None:
 
 		i = 0
 
-		for message in consumer:
+		for message in consumer.poll(max_records=10):
 			print(message)
 
 			file_name = f"message_{int(datetime.datetime.today().timestamp())}"
 
 			with open(file_name, "wb") as file:
 				file.write(message)
+
+			i += 1
 
 			if i <= 10:
 				continue
