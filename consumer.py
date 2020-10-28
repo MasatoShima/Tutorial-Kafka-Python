@@ -19,9 +19,9 @@ from kafka import KafkaConsumer
 # **************************************************
 # ----- Constants & Variables
 # **************************************************
-HOST = "10.2.151.196"
+HOST = "10.2.152.95"
 PORT = "9092"
-TOPIC = "SKDB.public.sdmstbas"
+TOPIC = "SKDB.public.sdcocdmst"
 
 DIR_OUTPUT = "data/output/"
 
