@@ -71,9 +71,8 @@ def subscribe_message() -> None:
 
 		while True:
 			messages = consumer.poll()
-			print(messages)
 
-			for message in messages:
+			for _, message in messages:
 				logger.info(f"Received message. Key: {message.key}")
 
 				file_name = f"message_{int(datetime.datetime.today().timestamp())}"
