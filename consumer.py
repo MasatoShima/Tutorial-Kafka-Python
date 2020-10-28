@@ -59,7 +59,7 @@ def subscribe_message() -> None:
 
 	try:
 		consumer = KafkaConsumer(
-			topics=TOPIC,
+			TOPIC,
 			bootstrap_servers=f"{HOST}:{PORT}"
 		)
 
