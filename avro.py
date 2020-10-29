@@ -27,7 +27,7 @@ import fastavro
 # ----- Function main
 # **************************************************
 def main() -> None:
-	read_schema()
+	# read_schema()
 
 	read_avro()
 
@@ -49,7 +49,7 @@ def read_schema() -> fastavro.schema:
 # ----- Function read_avro
 # **************************************************
 def read_avro():
-	with open("data/payment.avro", "rb") as file:
+	with open("data/sample.avro", "rb") as file:
 		for record in fastavro.reader(file):
 			print(record)
 
