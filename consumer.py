@@ -73,7 +73,6 @@ def subscribe_message() -> None:
 		while True:
 			for record in consumer:
 				print(record)
-				print(record.value.decode())
 
 				logger.info(
 					f"Received message. "
