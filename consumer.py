@@ -62,22 +62,18 @@ def subscribe_message() -> None:
 	try:
 		os.makedirs(DIR_OUTPUT, exist_ok=True)
 
+		consumer = KafkaConsumer(
+			TOPIC,
+			bootstrap_servers=f"{HOST}:{PORT}",
+			auto_offset_reset="earliest",
+			enable_auto_commit=False,
+			max_poll_records=1
+		)
+
 		while True:
-			consumer = KafkaConsumer(
-				TOPIC,
-				bootstrap_servers=f"{HOST}:{PORT}",
-				auto_offset_reset="earliest",
-				enable_auto_commit=False,
-				max_poll_records=1
-			)
+			for record in consumer:
+				print(record)
 
-			records = consumer.poll(
-				timeout_ms=5000,
-				max_records=1,
-				update_offsets=False
-			)
-
-			for record in records.values():
 				for r in record:
 					if r.value is not None:
 						logger.info(f"Received message. Key: {r.key}")
