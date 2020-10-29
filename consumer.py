@@ -72,18 +72,16 @@ def subscribe_message() -> None:
 
 		while True:
 			for record in consumer:
-				print(record)
+				logger.info(
+					f"Received message. "
+					f"Topic: {record.topic} "
+					f"Offset: {record.offset}"
+				)
 
-				for r in record:
-					if r.value is not None:
-						logger.info(f"Received message. Key: {r.key}")
+				file_name = f"message_{int(datetime.datetime.today().timestamp())}"
 
-						file_name = f"message_{int(datetime.datetime.today().timestamp())}"
-
-						with open(f"{DIR_OUTPUT}{file_name}", "wb") as file:
-							file.write(r.value)
-					else:
-						continue
+				with open(f"{DIR_OUTPUT}{file_name}", "wb") as file:
+					file.write(record.value)
 
 	except KeyboardInterrupt:
 		logger.info("Received request to end subscribe")
