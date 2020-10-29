@@ -72,6 +72,8 @@ def subscribe_message() -> None:
 
 		while True:
 			for record in consumer:
+				print(record)
+
 				logger.info(
 					f"Received message. "
 					f"Topic: {record.topic} "
@@ -83,7 +85,12 @@ def subscribe_message() -> None:
 				with open(f"{DIR_OUTPUT}{file_name}", "wb") as file:
 					file.write(record.value)
 
+				break
+
+			break
+
 	except KeyboardInterrupt:
+		logger.info("\n")
 		logger.info("Received request to end subscribe")
 
 	except Exception as error:
