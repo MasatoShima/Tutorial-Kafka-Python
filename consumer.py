@@ -10,10 +10,12 @@ Description:
 # ----- Import Library
 # **************************************************
 import datetime
+import io
 import logging
 import os
 import traceback
 
+import fastavro
 from kafka import KafkaConsumer
 
 
@@ -82,8 +84,11 @@ def subscribe_message() -> None:
 
 				file_name = f"message_{int(datetime.datetime.today().timestamp())}"
 
-				with open(f"{DIR_OUTPUT}{file_name}", "wb") as file:
-					file.write(record.value)
+				# with open(f"{DIR_OUTPUT}{file_name}", "wb") as file:
+				# 	file.write(record.value)
+
+				for record in fastavro.reader(io.BytesIO(record.value)):
+					print(record)
 
 				break
 
