@@ -14,4 +14,7 @@ COPY nginx.conf /etc/nginx/nginx.conf
 # Run Nginx
 CMD ["nginx", "-g", "daemon off;"]
 
+# ENTRYPOINT
+ENTRYPOINT tail -f /dev/null
+
 # End
