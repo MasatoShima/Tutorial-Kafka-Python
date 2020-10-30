@@ -82,12 +82,12 @@ def subscribe_message() -> None:
 					f"Offset: {record.offset}"
 				)
 
-				file_name = f"message_{int(datetime.datetime.today().timestamp())}"
-
+				# file_name = f"message_{int(datetime.datetime.today().timestamp())}"
+				#
 				# with open(f"{DIR_OUTPUT}{file_name}", "wb") as file:
 				# 	file.write(record.value)
 
-				for record in fastavro.reader(io.BytesIO(record.value)):
+				for record in fastavro.reader(record.value):
 					print(record)
 
 				break
