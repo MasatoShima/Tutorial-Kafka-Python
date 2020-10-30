@@ -87,7 +87,7 @@ def subscribe_message() -> None:
 				# with open(f"{DIR_OUTPUT}{file_name}", "wb") as file:
 				# 	file.write(record.value)
 
-				for r in fastavro.reader(record):
+				for r in fastavro.reader(io.BytesIO(record.value)):
 					print(r)
 
 				break
