@@ -9,7 +9,7 @@ FROM centos:centos7.7.1908
 
 WORKDIR /
 
-RUN yum -y install gcc python3 python3-pip \
+RUN yum -y install gcc python3 python3-devel python3-pip \
  && yum clean all \
  && rm -rf /var/cache/yum/*
 
