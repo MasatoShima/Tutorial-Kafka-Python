@@ -66,6 +66,7 @@ def subscribe_message() -> None:
 	consumer = AvroConsumer(
 		{
 			"bootstrap.servers": f"{TOPIC}:{PORT}",
+			"group.id": "test",
 			"auto.offset.reset": "earliest",
 			"enable.auto.commit": False,
 			"max.poll.records": 1,
