@@ -69,7 +69,6 @@ def subscribe_message() -> None:
 			"group.id": "test",
 			"auto.offset.reset": "earliest",
 			"enable.auto.commit": False,
-			"max.poll.records": 1,
 			"schema.registry.url": f"http://{HOST}:8081"
 		}
 	)
