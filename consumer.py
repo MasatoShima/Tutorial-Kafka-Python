@@ -65,7 +65,7 @@ def subscribe_message() -> None:
 
 	consumer = AvroConsumer(
 		{
-			"bootstrap.servers": f"{TOPIC}:{PORT}",
+			"bootstrap.servers": f"{HOST}:{PORT}",
 			"group.id": "test",
 			"auto.offset.reset": "earliest",
 			"enable.auto.commit": False,
@@ -88,7 +88,6 @@ def subscribe_message() -> None:
 				print(message.value())
 
 		except KeyboardInterrupt:
-			logger.info("\n")
 			logger.info("Received request to end subscribe")
 
 			break
