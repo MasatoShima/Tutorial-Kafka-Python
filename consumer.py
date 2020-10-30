@@ -15,8 +15,8 @@ import logging
 import os
 import traceback
 
-import fastavro
-from kafka import KafkaConsumer
+from confluent_kafka.avro import AvroConsumer
+from confluent_kafka.avro.serializer import SerializerError
 
 
 # **************************************************
@@ -61,49 +61,54 @@ def main() -> None:
 def subscribe_message() -> None:
 	logger.info("Start subscribe messages...")
 
-	try:
-		os.makedirs(DIR_OUTPUT, exist_ok=True)
+	os.makedirs(DIR_OUTPUT, exist_ok=True)
 
-		consumer = KafkaConsumer(
-			TOPIC,
-			bootstrap_servers=f"{HOST}:{PORT}",
-			auto_offset_reset="earliest",
-			enable_auto_commit=False,
-			max_poll_records=1
-		)
+	consumer = AvroConsumer(
+		{
+			"bootstrap.servers": f"{TOPIC}:{PORT}",
+			"auto.offset.reset": "earliest",
+			"enable.auto.commit": False,
+			"max.poll.records": 1
+		}
+	)
 
-		while True:
-			for record in consumer:
-				print(record)
+	consumer.subscribe([TOPIC])
 
-				logger.info(
-					f"Received message. "
-					f"Topic: {record.topic} "
-					f"Offset: {record.offset}"
-				)
+	while True:
+		try:
+			message = consumer.poll(timeout=10)
 
-				# file_name = f"message_{int(datetime.datetime.today().timestamp())}"
-				#
-				# with open(f"{DIR_OUTPUT}{file_name}", "wb") as file:
-				# 	file.write(record.value)
+			if message is None:
+				continue
+			elif message.error():
+				logger.error(f"Error... \n {message.error()}")
+			else:
+				print(message)
+				print(message.value())
 
-				for r in fastavro.reader(io.BytesIO(record.value)):
-					print(r)
-
-				break
+		except KeyboardInterrupt:
+			logger.info("\n")
+			logger.info("Received request to end subscribe")
 
 			break
 
-	except KeyboardInterrupt:
-		logger.info("\n")
-		logger.info("Received request to end subscribe")
+		except SerializerError as error:
+			logger.error(
+				f"SerializerError..."
+				f"{error}"
+				f"{traceback.format_exc()}"
+			)
 
-	except Exception as error:
-		logger.error(
-			f"Unknown exception..."
-			f"{error}"
-			f"{traceback.format_exc()}"
-		)
+			break
+
+		except Exception as error:
+			logger.error(
+				f"Unknown exception..."
+				f"{error}"
+				f"{traceback.format_exc()}"
+			)
+
+			break
 
 	logger.info("End subscribe messages...")
 
