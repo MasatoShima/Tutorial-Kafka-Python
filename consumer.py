@@ -9,8 +9,6 @@ Description:
 # **************************************************
 # ----- Import Library
 # **************************************************
-import datetime
-import io
 import logging
 import os
 import traceback
@@ -84,7 +82,6 @@ def subscribe_message() -> None:
 			elif message.error():
 				logger.error(f"Error... \n {message.error()}")
 			else:
-				print(message)
 				print(message.value())
 
 		except KeyboardInterrupt:
