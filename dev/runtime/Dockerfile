@@ -12,7 +12,7 @@ WORKDIR /
 RUN yum -y install python3 python3-pip \
  && yum clean all \
  && rm -rf /var/cache/yum/* \
- && pip3 install confluent-kafka
+ && pip3 install confluent-kafka \
  && pip3 install fastavro
 
 # ENTRYPOINT
