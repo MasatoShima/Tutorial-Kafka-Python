@@ -1,9 +1,20 @@
-# 2020/10/30
+# """
+# Name: Dockerfile
+# Description: Dockerfile
+# Created by: Masato Shima
+# Created on: 2020/10/30
+# """
 
-FROM python:3.9.0-buster
+FROM centos:centos7.7.1908
 
-RUN pip install confluent-kafka
+WORKDIR /
 
+RUN yum -y install python3 python3-pip \
+ && yum clean all \
+ && rm -rf /var/cache/yum/* \
+ && pip install confluent-kafka
+
+# ENTRYPOINT
 ENTRYPOINT tail -f /dev/null
 
 # End
