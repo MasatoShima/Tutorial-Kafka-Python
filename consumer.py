@@ -68,7 +68,8 @@ def subscribe_message() -> None:
 			"bootstrap.servers": f"{TOPIC}:{PORT}",
 			"auto.offset.reset": "earliest",
 			"enable.auto.commit": False,
-			"max.poll.records": 1
+			"max.poll.records": 1,
+			"schema.registry.url": f"http://{HOST}:8081"
 		}
 	)
 
