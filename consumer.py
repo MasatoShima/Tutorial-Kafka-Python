@@ -90,7 +90,6 @@ def subscribe_message() -> None:
 			else:
 				print(message.value())
 				write_message(message.value(), schema)
-				break
 
 		except KeyboardInterrupt:
 			logger.info("Received request to end subscribe")
