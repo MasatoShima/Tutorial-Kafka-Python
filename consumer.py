@@ -139,7 +139,7 @@ def write_message(message: Dict[str, Any], schema: fastavro.schema) -> None:
 	filename = f"avro-{TOPIC}-{datetime.datetime.now().timestamp()}.avro"
 
 	with open(f"avro/{filename}", "wb") as file:
-		fastavro.writer(file, schema, message)
+		fastavro.writer(file, schema, [message])
 
 	return
 
