@@ -50,7 +50,7 @@ def read_schema() -> fastavro.schema:
 # ----- Function read_avro
 # **************************************************
 def read_avro():
-	with open("data/sample.avro", "rb") as file:
+	with open("avro/avro-SKDB.public.sdcocdmst.avro", "rb") as file:
 		for record in fastavro.reader(file):
 			print(record)
 
