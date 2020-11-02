@@ -27,7 +27,7 @@ import fastavro
 # ----- Function main
 # **************************************************
 def main() -> None:
-	# read_schema()
+	read_schema()
 
 	read_avro()
 
@@ -38,9 +38,10 @@ def main() -> None:
 # ----- Function read_schema
 # **************************************************
 def read_schema() -> fastavro.schema:
-	with open("data/sample_1.json", "rb") as file:
+	with open("avro/schema/schema-SKDB.public.sdcocdmst.json", "r") as file:
 		schema = json.load(file)
-		schema = fastavro.parse_schema(schema["schema"]["fields"][0])
+		schema = json.loads(schema["schema"])
+		schema = fastavro.parse_schema(schema)
 
 	return schema
 

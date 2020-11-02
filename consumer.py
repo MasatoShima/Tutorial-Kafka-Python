@@ -9,10 +9,14 @@ Description:
 # **************************************************
 # ----- Import Library
 # **************************************************
+import datetime
+import json
 import logging
 import os
 import traceback
+from typing import Any, Dict
 
+import fastavro
 from confluent_kafka.avro import AvroConsumer
 from confluent_kafka.avro.serializer import SerializerError
 
@@ -73,6 +77,8 @@ def subscribe_message() -> None:
 
 	consumer.subscribe([TOPIC])
 
+	schema = read_schema()
+
 	while True:
 		try:
 			message = consumer.poll(timeout=10)
@@ -83,6 +89,8 @@ def subscribe_message() -> None:
 				logger.error(f"Error... \n {message.error()}")
 			else:
 				print(message.value())
+				write_message(message, schema)
+				break
 
 		except KeyboardInterrupt:
 			logger.info("Received request to end subscribe")
@@ -108,6 +116,30 @@ def subscribe_message() -> None:
 			break
 
 	logger.info("End subscribe messages...")
+
+	return
+
+
+# **************************************************
+# ----- Function read_schema
+# **************************************************
+def read_schema() -> fastavro.schema:
+	with open(f"avro/schema/schema-{TOPIC}.json", "r") as file:
+		schema = json.load(file)
+		schema = json.loads(schema["schema"])
+		schema = fastavro.parse_schema(schema)
+
+	return schema
+
+
+# **************************************************
+# ----- Function write_message
+# **************************************************
+def write_message(message: Dict[str, Any], schema: fastavro.schema) -> None:
+	filename = f"avro-{TOPIC}-{datetime.datetime.now().timestamp()}.avro"
+
+	with open(f"avro/{filename}", "wb") as file:
+		fastavro.writer(file, schema, message)
 
 	return
 
