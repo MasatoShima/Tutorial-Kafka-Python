@@ -89,11 +89,13 @@ def subscribe_message() -> None:
 				logger.error(f"Error... \n {message.error()}")
 			else:
 				print(message.value())
-				write_message(message, schema)
+				write_message(message.value(), schema)
 				break
 
 		except KeyboardInterrupt:
 			logger.info("Received request to end subscribe")
+
+			consumer.close()
 
 			break
 
