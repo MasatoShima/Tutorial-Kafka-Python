@@ -85,10 +85,12 @@ def subscribe_message() -> None:
 
 			if message is None:
 				continue
+			elif message.value() is None:
+				continue
 			elif message.error():
 				logger.error(f"Error... \n {message.error()}")
 			else:
-				print(message.value())
+				print(json.dumps(message.value(), ensure_ascii=False))
 				write_message(message.value(), schema)
 
 		except KeyboardInterrupt:
