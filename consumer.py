@@ -68,7 +68,7 @@ def subscribe_message() -> None:
 	consumer = AvroConsumer(
 		{
 			"bootstrap.servers": f"{HOST}:{PORT}",
-			"group.id": "test",
+			"group.id": "test_python",
 			"auto.offset.reset": "earliest",
 			"enable.auto.commit": False,
 			"schema.registry.url": f"http://{HOST}:8081"
