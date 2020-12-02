@@ -26,7 +26,7 @@ from confluent_kafka.avro.serializer import SerializerError
 # **************************************************
 HOST = "10.2.152.95"
 PORT = "9092"
-TOPIC = "SKDB.public.sdmcobilccl"
+TOPIC = "SKDB.public.sdmstmkt"
 
 DIR_OUTPUT = "data/output/"
 
